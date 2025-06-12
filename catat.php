@@ -1,25 +1,25 @@
 <?php
-
 require 'koneksi.php';
+session_start();
 
 $sql = "SELECT * FROM bayi";
-$babies = $koneksi->execute_query($sql)->fetch_all(MYSQLI_ASSOC);
+$babies = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    session_start();
     $id_kader = $_SESSION['id'];
     $id_bayi = $_POST['bayi'];
     $tinggi = $_POST['tinggi'];
     $berat = $_POST['berat'];
 
-    $sql = "INSERT INTO catatan (id_kader,id_bayi,tinggi,berat,tanggal) VALUES (?,?,?,?,CURRENT_DATE)";
-    $row = $koneksi->execute_query($sql, [$id_kader,$id_bayi,$tinggi,$berat]);
+    $sql = "INSERT INTO catatan (id_kader,id_bayi,tinggi,berat,tanggal_lahir) VALUES (?,?,?,?,CURRENT_DATE)";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$id_kader, $id_bayi, $tinggi, $berat]);
 
-    if ($row) {
-        header("locatio: catat.php");
+    if ($stmt) {
+        header("Location: catat.php");
+        exit;
     }
 }
-
 ?>
 
 <!DOCTYPE html>

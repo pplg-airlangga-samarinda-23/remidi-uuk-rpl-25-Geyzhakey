@@ -19,12 +19,12 @@ if(!isset($_SESSION['username'])) {
 </head>
 <body>
     <h1>sistem posyandu</h1>
-    <h2>Selamat datang, <?=$_SESSION['nama']?></h2>
+    <h2>Selamat datang, <?=$_SESSION['username']?></h2>
     <a href="logout.php">logout</a>
 
     <nav>
         <ul>
-            <?php if ($_SESSION['role'] == 'admin') : ?>
+            <?php if ($_SESSION['username'] == 'admin') : ?>
                 <li><a href="pengguna.php">Data pengguna</a></li>
                 <?php endif ?>
 

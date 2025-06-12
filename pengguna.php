@@ -1,8 +1,8 @@
 <?php
 require 'koneksi.php';
 
-$sql = "SELECT * FROM kader";
-$row = $db->prepare("SELECT * FROM `kader`");
+$sql = "SELECT * FROM pengguna";
+$row = $db->prepare("SELECT * FROM `pengguna`");
 $row->execute();
 
 ?>
